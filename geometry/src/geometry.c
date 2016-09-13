@@ -10,10 +10,12 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
-//Your program should present a menu for the human to choose which shape to calculate, then ask them for the appropriate values (length, width, radius, etc.). Then it should pass those values to the appropriate function and display the resulting area.
-
-//Notice that you must not input the values inside the functions, and you must not display the values inside the functions. All input and output must be in the main(), and values must be passed to the functions and returned from them.
+static int area_square(int length);
+static int area_rectangle(int length, int width);
+static int area_triangle(int base, int height);
+static double area_circle(int radius);
 
 int main(void) {
 	printf("Hello! What shape would you like to calculate the area for?\n");
@@ -22,23 +24,76 @@ int main(void) {
 	printf("\t 2) rectangle?\n");
 	printf("\t 3) triangle?\n");
 	printf("\t 4) circle?\n");
+	printf("\t 5) quit the program.\n");
 
 	printf("Enter your the number of your choice: ");
 	int choice;
 	scanf("%d", &choice);
+	int area;
 
-	if (choice == 1) {
-		printf("\nWhat is the side length of your square?");
+	while (choice != 5) {
+		if (choice == 1) {
+			printf("What is the side length of your square: ");
+			int side;
+			scanf("\n%d", &side);
+			area = area_square(side);
+			printf("The area of your square is %d units.", area);
+		}
+
+		if (choice == 2) {
+			printf("What is the length of your rectangle: ");
+			int length;
+			scanf("\n%d", &length);
+			printf("What is the width of your rectangle: ");
+			int width;
+			scanf("\n%d", &width);
+			area = area_rectangle(length, width);
+			printf("The area of your rectangle is %d units.", area);
+		}
+
+		if (choice == 3) {
+			printf("What is the base of your triangle: ");
+			int base;
+			scanf("\n%d", &base);
+			printf("What is the height of your triangle: ");
+			int height;
+			scanf("\n%d", &height);
+			area = area_triangle(base, height);
+			printf("The area of your triangle is %d units.", area);
+		}
+
+		if (choice == 4) {
+			printf("What is radius of your circle: ");
+			int radius;
+			scanf("\n%d", &radius);
+			double area = area_circle(radius);
+			printf("The area of your circle is %f units.", area);
+		}
+		printf("\n\nAnother one! Enter your the number of your choice: ");
+		scanf("%d", &choice);
 	}
 
-	if (choice == 2) {
-		printf("\nWhat is the length of your rectangle?");
-		// scanf
-		printf("\nWhat is the width of your rectangle?");
-	}
-
-//	choice 3
-//	choice 4
-
+	printf("Exited the program");
 	return EXIT_SUCCESS;
+}
+
+// returns the area of a square
+static int area_square(int length) {
+	return length*length;
+}
+
+// returns the area of a rectangle
+static int area_rectangle(int length, int width) {
+	return length*width;
+}
+
+//returns the area of a triangle
+static int area_triangle(int base, int height) {
+	return (base*height)/2;
+}
+
+//returns the area of a circle
+static double area_circle(int radius) {
+	double pi = 4.0 * atan(1.0);
+	return pi*(radius*radius);
 }
