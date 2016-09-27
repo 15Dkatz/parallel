@@ -1,13 +1,3 @@
-/*
- =========================================================================
- Name        : Matrix.c
- Author      : David Katz
- =========================================================================
- */
-
-#include <stdio.h>
-#include <stdlib.h>
-
 #define Mx(arg,r,c) ((arg).pX[r][c])
 
 struct Matrix {
@@ -27,48 +17,6 @@ void MatPrint(struct Matrix M, char messg[]) {
 		}
 		printf("\n");
 	}
-}
-
-struct Matrix MatAlloc();
-void MatFree();
-void MatAdd();
-
-int main(void) {
-	struct Matrix m = MatAlloc(2, 2);
-
-	Mx(m, 0, 0) = 1.0;
-	Mx(m, 0, 1) = 2.0;
-	Mx(m, 1, 0) = 3.0;
-	Mx(m, 1, 1) = 5.0;
-
-	MatPrint(m, "Pre-free");
-
-	MatFree(m);
-
-	MatPrint(m, "Post-free");
-
-	printf("Now testing MatAdd");
-
-	struct Matrix a = MatAlloc(2, 2);
-	struct Matrix b = MatAlloc(2, 2);
-
-	Mx(a, 0, 0) = 1.0;
-	Mx(a, 0, 1) = 1.0;
-	Mx(a, 1, 0) = 1.0;
-	Mx(a, 1, 1) = 1.0;
-
-	Mx(b, 0, 0) = 1.0;
-	Mx(b, 0, 1) = 1.0;
-	Mx(b, 1, 0) = 1.0;
-	Mx(b, 1, 1) = 1.0;
-
-	MatPrint(a, "pre-add");
-
-	MatAdd(a, b);
-
-	MatPrint(a, "post-add");
-
-	return EXIT_SUCCESS;
 }
 
 // Returns a Matrix struct with properly allocated memory
@@ -94,7 +42,6 @@ struct Matrix MatAlloc(int r, int c) {
 	// return the properly allocated Matrix struct
 	return m;
 }
-
 
 // Frees the memory allocated to a Matrix struct
 // Paramater: m = Matrix struct
