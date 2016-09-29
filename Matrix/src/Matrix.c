@@ -46,5 +46,6 @@ int main(void) {
 
 	MatFree(a);
 	MatFree(b);
+
 	return EXIT_SUCCESS;
 }

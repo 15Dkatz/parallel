@@ -9,6 +9,7 @@
 // Use MatAdd to add the values of one Matrix to another
 // ======================================================================== //
 
+#define MATLIB_H
 #define Mx(arg,r,c) ((arg).pX[r][c])
 
 struct Matrix {
