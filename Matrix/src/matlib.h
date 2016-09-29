@@ -1,3 +1,14 @@
+// ======================================================================== //
+// This library allows you to use Matrices in C
+// Simply use the struct type to create a Matrix
+// Each Matrix has rows, columns, and an array of pointers for its values
+// Use the Mx macro to access and set values in a Matrix
+// Use MatPrint to print out a Matrix in a nice format
+// Use MatAlloc to allocate the memory of a Matrix
+// Use MatFree to properly free memory space after using MatAlloc
+// Use MatAdd to add the values of one Matrix to another
+// ======================================================================== //
+
 #define Mx(arg,r,c) ((arg).pX[r][c])
 
 struct Matrix {
@@ -6,6 +17,14 @@ struct Matrix {
 	double **pX;
 };
 
+
+/*-------------------------------------------------------------------
+ * Function:    MatPrint
+ * Purpose:     Print the values of a Matrix struct to the Console
+ * In args:     m: the Matrix to print
+ *              messg: a message to print before the struct
+ * Outputs:     none
+ */
 void MatPrint(struct Matrix M, char messg[]) {
 	int r, c;
 	// Print the message
@@ -19,8 +38,14 @@ void MatPrint(struct Matrix M, char messg[]) {
 	}
 }
 
-// Returns a Matrix struct with properly allocated memory
-// Parameters: r = rows, c = columns
+/*-------------------------------------------------------------------
+ * Function:    MatAlloc
+ * Purpose:     Allocate the proper amount of memory for the Matrix struct
+ * In args:     r: the number of rows in the Matrix
+ *              c: the number of columns in the Matrix
+ * Outputs:     Returns a Matrix struct with properly allocated memory
+ * 				based on rows and columns
+ */
 struct Matrix MatAlloc(int r, int c) {
 	// the struct to return after dynamic allocation
 	struct Matrix m;
@@ -43,8 +68,12 @@ struct Matrix MatAlloc(int r, int c) {
 	return m;
 }
 
-// Frees the memory allocated to a Matrix struct
-// Paramater: m = Matrix struct
+/*-------------------------------------------------------------------
+ * Function:    MatFree
+ * Purpose:     Free the Matrix struct's allocated memory
+ * In args:     m: the Matrix struct to free
+ * Outputs:     none
+ */
 void MatFree(struct Matrix m) {
 	// iterate through the rows
 	for (int r=0; r < m.rows; r++) {
@@ -55,12 +84,22 @@ void MatFree(struct Matrix m) {
 		}
 	}
 	// frees the allocated memory as designated by pX in the struct
+
+
+	// does not go in and free everything so...
+	// free all the pointers in the array!
+
 	free(m.pX);
 }
 
-// Adds the contents of a Matrix to another
-// Paramters: a = the first Matrix, b = the second Matrix
-// Will add the contents of b to a
+/*-------------------------------------------------------------------
+ * Function:    MatAdd
+ * Purpose:     Add the values of one Matrix struct to another
+ * In args:     a: the first Matrix (whose values will be augmented)
+ *              b: the second Matrix (whose values will be used for
+ *             	   augmentation)
+ * Outputs:     Returns a Matrix struct with augmented values.
+ */
 void MatAdd(struct Matrix a, struct Matrix b) {
 	// create a new Matrix of memory size a*b
 	// but if the dimensions are different, exit the program
