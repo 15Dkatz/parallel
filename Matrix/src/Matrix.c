@@ -44,5 +44,7 @@ int main(void) {
 
 	MatPrint(a, "post-add");
 
+	MatFree(a);
+	MatFree(b);
 	return EXIT_SUCCESS;
 }

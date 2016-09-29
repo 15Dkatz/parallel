@@ -81,14 +81,12 @@ void MatFree(struct Matrix m) {
 		for (int c=0; c < m.cols; c++) {
 			// set the value to 0
 			Mx(m, r, c) = 0.0;
+
 		}
+		// free the pointer associated with each row
+		free(m.pX[r]);
 	}
-	// frees the allocated memory as designated by pX in the struct
-
-
-	// does not go in and free everything so...
-	// free all the pointers in the array!
-
+	// finally free the pointer to the array of pointers
 	free(m.pX);
 }
 
